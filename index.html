@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="jquery/jquery.js"></script>
+		<script src="javascript.js"></script>
+	</head>
+	<body>
+		<div class="holder">
+			<div class="active">
+				<img src="img/image-1.png" alt="">
+			</div>
+			<div>
+				<img src="img/image-2.png" alt="">
+			</div>
+			<div>
+				<img src="img/image-3.png" alt="">
+			</div>
+			<div>
+				<img src="img/image-4.png" alt="">
+			</div>
+			<div>
+				<img src="img/image-5.png" alt="">
+			</div>
+		</div>
+		<style>
+			:root {
+				--bg: #fee;
+				--list: #33741B;
+			}
+			
+			.holder{
+				display: grid;
+				grid-gap: 1rem;
+				grid-auto-flow: column;
+				padding: 3rem 1rem;
+				background: var(--bg);
+				position: relative;
+				justify-content: center;
+				align-items: center;
+				overflow: hidden;
+				height: 20rem;
+			}
+			
+			.list {
+				background: var(--list);
+			}
+			
+			img {
+				width: 10rem;
+				height: 10rem;
+			}
+			
+			.active {
+				position: absolute;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				display: grid !important;
+				justify-content: center;
+				z-index: 100;
+				transition-duration: 2s;
+			}
+			
+			.active img {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+		<script>
+			function switchs(t = 1000, c = false) {
+				var i = 0;
+				var d = $(".holder div");
+				if (c) {
+					d.hide();
+					d.eq(0).addClass('active');
+				}
+		
+				setInterval(() => {
+					if (d.length > 1) {
+						if (i >= d.length) {
+							i = 0;
+						}
+						if (!c)
+							$('.holder div').eq(i).addClass("active").siblings().removeClass("active")
+						else 
+							$('.holder div').eq(i).addClass("active").siblings().removeClass('active').hide();
+		
+						i++;
+					}
+				}, t);
+			}
+			switchs(3000);
+		</script>
+	</body>
+</html>
